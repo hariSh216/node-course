@@ -44,7 +44,36 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
         }
     });*/
 
+    
+   /* db.collection('Todos').deleteOne({completed:true}).then((docs)=>{
+        console.log(JSON.stringify(docs));
+    }, (err, result) => {
+        if (err) {
+            return console.log("unable to insert user",err);
+        }
+    });*/
 
+    db.collection('Users').findOneAndDelete(
+        {_id:new ObjectID('5b057b87ce0cfafd11768069')}
+    ).then((docs)=>{
+        console.log(docs);
+    }, (err, result) => {
+        if (err) {
+            return console.log("unable to insert user",err);
+        }
+    });
+
+   db.collection('Users').findOneAndUpdate(
+        {_id:new ObjectID('5b057b87ce0cfafd11768069')},
+        {$set:{completed:false}},
+        {returnOriginal:false}
+    ).then((docs)=>{
+        console.log(docs);
+    }, (err, result) => {
+        if (err) {
+            return console.log("unable to insert user",err);
+        }
+    });
 
 
     client.close();
